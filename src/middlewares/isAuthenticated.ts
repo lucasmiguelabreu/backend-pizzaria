@@ -17,7 +17,7 @@ export function isAuthenticated(
         return res.status(401).end();
 
     }
-
+ 
     const [, token] = authToken.split(" ")
 
     try{
@@ -26,6 +26,9 @@ export function isAuthenticated(
             token,
             process.env.JWT_SECRET
         ) as Payload;
+
+        // recuperar o ID do token e colocar dentro de uma variavel request
+        req.user_id = sub;
 
         return next();
 
